@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <title>Settings • Insight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { important: true }</script>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="h-full bg-white text-gray-800">
+    <header class="border-b border-gray-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="h-8 w-8 rounded bg-teal-600"></div>
+            <span class="text-xl font-semibold text-teal-700">Insight</span>
+          </div>
+          <div class="relative">
+            <button id="userMenuBtn" class="flex items-center gap-2 rounded-full border border-gray-200 px-2 py-1 hover:bg-gray-50" aria-haspopup="menu" aria-expanded="false">
+              <div class="h-7 w-7 rounded-full bg-gray-200"></div>
+              <span class="text-sm text-gray-700" id="userEmail">user@example.com</span>
+            </button>
+            <div id="userMenu" class="absolute right-0 mt-2 w-40 origin-top-right rounded-md border border-gray-200 bg-white p-1 shadow-lg hidden" role="menu" aria-labelledby="userMenuBtn">
+              <button class="menu-item block w-full text-left" data-action="settings" role="menuitem">Settings</button>
+              <button class="menu-item block w-full text-left" data-action="logout" role="menuitem">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-6">
+      <h1 class="text-xl font-semibold">Settings</h1>
+      <div class="mt-4 grid gap-4">
+        <div class="rounded-lg border border-gray-200 p-4">
+          <label class="block text-sm font-medium text-gray-700">n8n Webhook URL</label>
+          <input id="cfg_webhook" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" placeholder="https://.../webhook/insights" />
+          <p class="mt-1 text-xs text-gray-500">Configure your data webhook. This is stored locally in your browser.</p>
+        </div>
+        <div class="rounded-lg border border-gray-200 p-4">
+          <label class="block text-sm font-medium text-gray-700">n8n Tracking URL</label>
+          <input id="cfg_tracking" class="mt-1 w-full rounded-md border border-gray-300 px-3 py-2" placeholder="https://.../webhook/track" />
+        </div>
+      </div>
+      <div class="mt-4">
+        <button id="cfg_save" class="rounded-md bg-teal-600 px-4 py-2 text-white hover:bg-teal-700">Save</button>
+      </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const w = localStorage.getItem('ip_n8n_webhook') || '';
+          const t = localStorage.getItem('ip_n8n_tracking') || '';
+          document.getElementById('cfg_webhook').value = w;
+          document.getElementById('cfg_tracking').value = t;
+          document.getElementById('cfg_save').addEventListener('click', () => {
+            localStorage.setItem('ip_n8n_webhook', document.getElementById('cfg_webhook').value.trim());
+            localStorage.setItem('ip_n8n_tracking', document.getElementById('cfg_tracking').value.trim());
+            alert('Saved locally.');
+          });
+        });
+      </script>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

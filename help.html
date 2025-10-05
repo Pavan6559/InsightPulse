@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Help Center - InsightPulse</title>
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            important: true,
+        }
+    </script>
+    
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+    
+    <meta name="color-scheme" content="light only" />
+    <style>
+      .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+      }
+      .step-number {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+      .features {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f9f9f9;
+}
+
+.features h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.feature-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  font-size: 38px;
+  color: #007bff;
+  margin-bottom: 12px;
+}
+
+    </style>
+  </head>
+
+  <body class="h-full bg-gradient-to-br from-gray-50 to-teal-50/30">
+    <!-- Header / Navigation Bar -->
+    <header class="border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-blur:bg-white/60 sticky top-0 z-40">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-14 items-center justify-between">
+          <!-- Logo and Brand -->
+          <div class="flex items-center gap-2">
+            <div class="h-8 w-8 rounded bg-gradient-to-br from-teal-600 to-teal-700"></div>
+            <span class="text-xl font-bold text-teal-700">InsightPulse</span>
+          </div>
+
+          <!-- User Menu and Actions -->
+          <div class="flex items-center gap-3">
+            <!-- Help Link -->
+            <a href="./help.html" aria-label="Help" title="Help" class="flex items-center gap-1 rounded-md border border-teal-200 bg-teal-50 px-3 py-1 text-sm text-teal-700 hover:bg-teal-100 transition-colors">
+              
+              Help
+            </a>
+            
+            <!-- Theme Toggle -->
+            <button id="themeToggle" aria-label="Toggle theme" title="Toggle theme" class="rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50 transition-colors">
+              🌞
+            </button>
+            
+            <!-- User Profile Menu -->
+            <div class="relative">
+              <button id="userMenuBtn" class="flex items-center gap-2 rounded-full border border-gray-200 px-2 py-1 hover:bg-gray-50 transition-colors" aria-haspopup="menu" aria-expanded="false">
+                <div class="h-7 w-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-xs font-medium text-white">
+                  U
+                </div>
+                <span class="hidden sm:inline text-sm text-gray-700" id="userEmail">user@example.com</span>
+                
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Header Section -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to InsightPulse</h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Your intelligent platform for startup market intelligence and competitive analysis</p>
+      </div>
+
+      <!-- Getting Started Section -->
+      <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          
+          <h2 class="text-2xl font-bold text-gray-900">Getting Started</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Steps -->
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="step-number bg-teal-100 text-teal-700">1</div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Search for Insights</h3>
+                <p class="text-gray-600 text-sm mt-1">Use the search bar to look up startups, industries, or categories. We'll fetch real-time insights from our data sources.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="step-number bg-teal-100 text-teal-700">2</div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Refine with Filters</h3>
+                <p class="text-gray-600 text-sm mt-1">Adjust filters on the left sidebar to narrow down by category, importance level, and time range.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="step-number bg-teal-100 text-teal-700">3</div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Save & Organize</h3>
+                <p class="text-gray-600 text-sm mt-1">Bookmark important startups and access them anytime from your Saved Startups section.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="step-number bg-teal-100 text-teal-700">4</div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Leverage AI Assistant</h3>
+                <p class="text-gray-600 text-sm mt-1">Chat with our AI to summarize findings, compare competitors, or identify investment opportunities.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Visual Guide -->
+          <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border border-teal-100">
+            <h3 class="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              
+              Pro Tip
+            </h3>
+            <p class="text-gray-700 text-sm mb-4">For comprehensive market analysis, visit the Market Analysis section to get synthesized signals across entire categories rather than individual startups.</p>
+            <div class="bg-white rounded-lg p-4 border border-teal-200">
+              <p class="text-xs text-gray-600 flex items-start gap-2">
+                
+                If you see loading indicators, our system is fetching the latest data. Error banners appear only when connection issues occur.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+
+    <section id="features" class="features">
+    <h2 class="text-2xl font-bold text-gray-900"><i class="fas fa-star"></i> Key Features</h2>
+
+    <div class="feature-list">
+        <div class="feature-item">
+        <i class="fas fa-robot feature-icon" style="color:#007bff;"></i>
+        <h3>AI-Powered Search</h3>
+        <p>Fetch accurate, summarized results using intelligent scraping and analysis.</p>
+        </div>
+
+        <div class="feature-item">
+        <i class="fas fa-database feature-icon" style="color:#28a745;"></i>
+        <h3>Seamless Data Storage</h3>
+        <p>Instantly store and manage insights using Supabase cloud integration.</p>
+        </div>
+
+        <div class="feature-item">
+        <i class="fas fa-bolt feature-icon" style="color:#ffc107;"></i>
+        <h3>Lightning Fast Performance</h3>
+        <p>Experience ultra-fast response with optimized n8n backend workflows.</p>
+        </div>
+
+        <div class="feature-item">
+        <i class="fas fa-shield-alt feature-icon" style="color:#dc3545;"></i>
+        <h3>Secure Connections</h3>
+        <p>End-to-end encrypted data exchange ensures your information stays protected.</p>
+        </div>
+
+        <div class="feature-item">
+        <i class="fas fa-chart-line feature-icon" style="color:#6f42c1;"></i>
+        <h3>Smart Analytics</h3>
+        <p>Gain insights from your search data through AI-driven trend detection.</p>
+        </div>
+
+        <div class="feature-item">
+        <i class="fas fa-code-branch feature-icon" style="color:#20c997;"></i>
+        <h3>Custom Integrations</h3>
+        <p>Connect your project easily with APIs, agents, and automation tools.</p>
+        </div>
+    </div>
+    </section>
+
+
+
+      <!-- FAQ Section -->
+      <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div class="flex items-center gap-3 mb-8">
+          
+          <h2 class="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="border-b border-gray-100 pb-6">
+            <h3 class="font-semibold text-gray-900 mb-2">How often is the data updated?</h3>
+            <p class="text-gray-600 text-sm">Our system continuously monitors data sources and updates insights in real-time. You'll always have access to the latest market intelligence.</p>
+          </div>
+          
+          <div class="border-b border-gray-100 pb-6">
+            <h3 class="font-semibold text-gray-900 mb-2">Can I export the data for external use?</h3>
+            <p class="text-gray-600 text-sm">Yes, you can export data in various formats from the Export Data section in the Tools menu. This feature is available for all paid plans.</p>
+          </div>
+          
+          <div class="border-b border-gray-100 pb-6">
+            <h3 class="font-semibold text-gray-900 mb-2">How does the AI Assistant work?</h3>
+            <p class="text-gray-600 text-sm">Our AI analyzes the data in your current view and can provide summaries, competitive comparisons, and investment insights based on the available information.</p>
+          </div>
+          
+          <div class="pb-2">
+            <h3 class="font-semibold text-gray-900 mb-2">Is there a mobile app available?</h3>
+            <p class="text-gray-600 text-sm">Currently, InsightPulse is optimized for web browsers. Our mobile-responsive design ensures a great experience on tablets and smartphones.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Support CTA -->
+      <section class="text-center mt-12">
+        <div class="bg-gradient-to-r from-teal-600 to-teal-700 rounded-2xl p-8 text-white">
+          <h2 class="text-2xl font-bold mb-4">Need More Help?</h2>
+          <p class="mb-6 max-w-2xl mx-auto">Our support team is here to help you get the most out of InsightPulse</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:support@insightpulse.com" class="bg-white text-teal-700 hover:bg-gray-100 font-medium py-2 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+              
+              Contact Support
+            </a>
+            <a href="./feedback.html" class="bg-teal-800 hover:bg-teal-900 font-medium py-2 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+                
+              Send Feedback
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col md:flex-row justify-around items-center">
+          <div class="text-sm text-gray-600">
+            &copy; 2023 InsightPulse. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

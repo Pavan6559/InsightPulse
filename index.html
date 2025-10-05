@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InsightPulse - Startup Intelligence Platform</title>
+    
+    <!-- TailwindCSS CDN -->
+     <!-- Font Awesome -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            important: true,
+        }
+    </script>
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.44.4/dist/umd/supabase.min.js"></script>
+    
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css" />
+    <meta name="color-scheme" content="light only" />
+  </head>
+
+  <body class="h-full bg-white text-gray-800">
+    <!-- Header / Navigation Bar -->
+    <header class="border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-blur:bg-white/60 sticky top-0 z-40">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-14 items-center justify-between">
+          <!-- Logo and Brand -->
+          <div class="flex items-center gap-2">
+            <div class="h-8 w-8 rounded bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center">
+  <i class="fas fa-chart-line text-white text-sm"></i>
+</div>
+            <span class="text-xl font-bold text-teal-700">InsightPulse</span>
+          </div>
+
+          <!-- User Menu and Actions -->
+          <div class="flex items-center gap-3">
+            <!-- Help Link -->
+            <a href="./help.html" aria-label="Help" title="Help" class="hidden sm:flex items-center gap-1 rounded-md border border-gray-200 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+              
+              Help
+            </a>
+            
+            <!-- Theme Toggle -->
+            <button id="themeToggle" aria-label="Toggle theme" title="Toggle theme" class="rounded-md border border-gray-200 px-2 py-1 text-gray-700 hover:bg-gray-50 transition-colors">
+              🌞
+            </button>
+            
+            <!-- Notifications -->
+            <button id="notifBtn" class="relative rounded-lg p-2 hover:bg-gray-100 transition-colors" aria-label="Notifications">
+            <i class="fa-solid fa-bell text-indigo-600 text-base"></i>
+            <span class="absolute top-1 right-1 flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            </span>
+            </button>
+
+
+            <!-- User Profile Menu -->
+            <div class="relative">
+              <button id="userMenuBtn" class="flex items-center gap-2 rounded-full border border-gray-200 px-2 py-1 hover:bg-gray-50 transition-colors" aria-haspopup="menu" aria-expanded="false">
+                <div class="h-7 w-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-xs font-medium text-white">
+                  U
+                </div>
+                <span class="hidden sm:inline text-sm text-gray-700" id="userEmail">user@example.com</span>
+                
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div id="userMenu" class="absolute right-0 mt-2 w-48 origin-top-right rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-labelledby="userMenuBtn">
+                <a href="./profile.html" class="menu-item flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left" role="menuitem">
+                  <i class="fas fa-user text-base"></i>
+                  Your Profile
+                </a>
+                <a href="./settings.html" class="menu-item flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left" role="menuitem">
+                  <i class="fas fa-cog text-base"></i>
+                  Settings
+                </a>
+                <a href="./billing.html" class="menu-item flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left" role="menuitem">
+                  <i class="fas fa-credit-card text-base"></i>
+                  Billing
+                </a>
+                <div class="my-1 border-t border-gray-100"></div>
+                <button class="menu-item flex items-center gap-2 text-red-600 w-full text-left px-3 py-2 text-sm hover:bg-gray-50" data-action="logout" role="menuitem">
+                  <i class="fas fa-sign-out-alt text-base"></i>
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Persistent Sidebar Navigation with Filters - 15% width -->
+    <nav id="sideNav" class="fixed inset-y-0 left-0 hidden w-64 border-r border-gray-200 bg-white/90 backdrop-blur lg:block z-30">
+      <div class="flex h-14 items-center gap-2 border-b border-gray-200 px-4">
+        <div class="h-7 w-7 rounded bg-teal-600"></div>
+        <span class="text-base font-semibold text-teal-700">InsightPulse</span>
+      </div>
+      
+      <div class="h-[calc(100vh-56px)] overflow-y-auto">
+        <!-- Main Navigation -->
+        <div class="p-4">
+          <ul class="space-y-1 text-sm">
+            <li>
+                <a href="./index.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors" data-key="dashboard">
+                <i class="fa-solid fa-chart-line text-teal-600"></i>
+                Main Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="./saved.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors" data-key="saved">
+                <i class="fa-regular fa-bookmark text-teal-600"></i>
+                Saved Startups
+                </a>
+            </li>
+            <li>
+                <a href="./market-analysis.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors" data-key="market">
+                <i class="fa-solid fa-chart-pie text-teal-600"></i>
+                Market Analysis
+                </a>
+            </li>
+            <li>
+                <a href="./trends.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors" data-key="trends">
+                <i class="fa-solid fa-arrow-trend-up text-teal-600"></i>
+                Industry Trends
+                </a>
+            </li>
+            <li>
+                <a href="./competitors.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors" data-key="competitors">
+                <i class="fa-solid fa-users-between-lines text-teal-600"></i>
+                Competitor Watch
+                </a>
+            </li>
+            </ul>
+
+
+          <!-- Divider -->
+          <div class="my-4 border-t border-gray-200"></div>
+
+          <!-- Tools Section -->
+          <p class="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">Tools</p>
+          <ul class="space-y-1 text-sm">
+            <li>
+                <a href="./help.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fa-regular fa-circle-question text-blue-500"></i>
+                    Help Center
+                </a>
+                </li>
+                <li>
+                <a href="./feedback.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fa-solid fa-comment-dots text-teal-500"></i>
+                    Send Feedback
+                </a>
+                </li>
+                <li>
+                <a href="./settings.html" class="ip-navlink flex items-center gap-2 rounded px-3 py-2 text-gray-700 hover:bg-gray-50 transition-colors">
+                    <i class="fa-solid fa-gear text-gray-600"></i>
+                    Settings
+                </a>
+                </li>
+          </ul>
+        </div>
+
+        <!-- Search Filters Section -->
+        <div class="border-t border-gray-200 p-4 bg-gray-50/50">
+          <h3 class="mb-4 text-sm font-semibold text-gray-900 flex items-center gap-2">
+            
+            Search Filters
+          </h3>
+
+          <!-- Category Filter -->
+          <div class="mb-5">
+            <p class="mb-3 text-sm font-medium text-gray-700 flex items-center gap-2">
+              
+              Category
+            </p>
+            <div class="flex flex-col gap-2 text-sm">
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="checkbox" class="filter-category rounded text-teal-600 focus:ring-teal-500" value="Product" /> 
+                <span>Product Updates</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="checkbox" class="filter-category rounded text-teal-600 focus:ring-teal-500" value="Marketing" /> 
+                <span>Marketing</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="checkbox" class="filter-category rounded text-teal-600 focus:ring-teal-500" value="Fundraising" /> 
+                <span>Fundraising</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="checkbox" class="filter-category rounded text-teal-600 focus:ring-teal-500" value="Other" /> 
+                <span>Other</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Importance Filter -->
+          <div class="mb-5">
+            <label for="importanceSelect" class="mb-3 block text-sm font-medium text-gray-700 flex items-center gap-2">
+              
+              Importance Level
+            </label>
+            <select id="importanceSelect" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-colors">
+              <option value="">All Importance Levels</option>
+              <option value="High">High Priority</option>
+              <option value="Medium">Medium Priority</option>
+              <option value="Low">Low Priority</option>
+            </select>
+          </div>
+
+          <!-- Date Range Filter -->
+          <div class="mb-5">
+            <p class="mb-3 text-sm font-medium text-gray-700 flex items-center gap-2">
+              
+              Date Range
+            </p>
+            <div class="flex flex-col gap-2 text-sm">
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="radio" name="dateRange" value="" checked class="text-teal-600 focus:ring-teal-500" /> 
+                <span>Any time</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="radio" name="dateRange" value="24h" class="text-teal-600 focus:ring-teal-500" /> 
+                <span>Last 24 hours</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="radio" name="dateRange" value="week" class="text-teal-600 focus:ring-teal-500" /> 
+                <span>Last week</span>
+              </label>
+              <label class="flex items-center gap-2 hover:bg-gray-50 rounded p-1 cursor-pointer">
+                <input type="radio" name="dateRange" value="month" class="text-teal-600 focus:ring-teal-500" /> 
+                <span>Last month</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Clear Filters Button -->
+          <button id="clearFilters" class="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+            Clear All Filters
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area - 60% width -->
+    <main class="mx-auto max-w-[60%] px-4 sm:px-6 lg:px-8 py-6 lg:ml-60">
+      <!-- Hero Search Section -->
+      <section class="mb-8">
+        <form id="searchForm" class="relative">
+          <div class="mx-auto max-w-4xl">
+            <label for="searchInput" class="sr-only">Search startups and insights</label>
+            <div class="flex items-center gap-2">
+              <div class="relative flex-1">
+                <input
+                  id="searchInput"
+                  type="text"
+                  placeholder="Search by startup name, industry, or category (e.g., FinTech SaaS, AI Healthcare, E-commerce)"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-4 text-base shadow-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-colors"
+                  autocomplete="off"
+                  aria-autocomplete="list"
+                  aria-expanded="false"
+                  aria-controls="historyList"
+                />
+                <!-- Search Icon -->
+                <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
+                  search
+                </span>
+                <!-- Autocomplete dropdown -->
+                <div id="historyList" class="absolute z-20 mt-1 w-full rounded-lg border border-gray-200 bg-white shadow-lg hidden max-h-60 overflow-y-auto"></div>
+              </div>
+              <button
+                type="submit"
+                class="rounded-lg bg-teal-600 px-6 py-4 text-white font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 transition-colors shadow-sm"
+                aria-label="Search insights"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+        
+        <!-- Error Banner -->
+        <div id="errorBanner" class="mx-auto mt-4 max-w-4xl hidden">
+          <div class="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 flex items-center gap-2">
+            <span class="material-symbols-outlined text-base">error</span>
+            <span>Couldn't fetch insights. Please try again later or check your connection.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <section>
+        <!-- Loading State -->
+        <div id="loading" class="hidden">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="inline-block h-5 w-5 animate-spin rounded-full border-2 border-teal-600 border-t-transparent"></span>
+            <span class="text-sm text-gray-600 font-medium">Fetching latest insights...</span>
+          </div>
+          <!-- Skeleton Loading Cards -->
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div class="skeleton-card bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse rounded-xl h-32"></div>
+            <div class="skeleton-card bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse rounded-xl h-32"></div>
+            <div class="skeleton-card bg-gradient-to-r from-gray-200 to-gray-300 animate-pulse rounded-xl h-32"></div>
+          </div>
+        </div>
+
+        <!-- Top Insights Section -->
+        <div id="topInsights" class="mb-6 hidden">
+        <h3 class="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <i class="fa-solid fa-star text-yellow-500"></i>
+            Top Insights This Week
+        </h3>
+        <div id="topInsightsList" class="grid grid-cols-1 gap-4 md:grid-cols-3"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="rounded-xl border-2 border-dashed border-gray-300 p-12 text-center mt-2">
+          <div class="mx-auto mb-4 h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
+            <span class="material-symbols-outlined text-gray-500 text-2xl">
+              search
+            </span>
+          </div>
+          <h3 class="mb-2 text-lg font-semibold text-gray-900">No insights yet</h3>
+          <p class="text-gray-600 mb-4">Search for a startup, industry, or category to discover valuable insights and market intelligence.</p>
+          <button class="rounded-lg bg-teal-600 px-4 py-2 text-sm text-white hover:bg-teal-700 transition-colors" onclick="document.getElementById('searchInput').focus()">
+            Start Searching
+          </button>
+        </div>
+
+        <!-- Results Grid -->
+        <div id="results" class="grid grid-cols-1 gap-4 md:grid-cols-1"></div>
+
+        <!-- Saved Startups Section -->
+        <div id="savedSection" class="mt-10">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              Recently Saved
+            </h3>
+            <a href="./saved.html" class="text-sm text-teal-600 hover:text-teal-700 font-medium flex items-center gap-1 transition-colors">
+              View All
+            </a>
+          </div>
+          <div id="savedList" class="grid grid-cols-1 gap-4"></div>
+          <p id="noSaved" class="text-sm text-gray-500 text-center py-8"></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Fixed Right AI Chat Panel - 25% width -->
+    <aside id="chatPanel" class="fixed right-0 top-14 h-[calc(100vh-56px)] w-[25%] border-l border-gray-200 bg-white/95 backdrop-blur lg:block z-20">
+      <div class="flex h-full flex-col">
+        <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+        <h3 class="text-sm font-semibold text-gray-900 flex items-center gap-2">
+            <i class="fa-solid fa-robot text-teal-600"></i>
+            AI Assistant
+        </h3>
+        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Beta</span>
+        </div>
+
+        <div id="chatList" class="flex-1 space-y-4 overflow-y-auto p-4">
+          <div class="rounded-xl bg-teal-50 p-4 text-sm text-teal-800 border border-teal-100">
+            <div class="flex items-start gap-2">
+            <i class="fas fa-lightbulb text-base text-teal-600"></i>
+            <div>
+                <p class="font-medium">Hi! I'm your AI research assistant.</p>
+                <p class="mt-1">I can help you summarize results, compare competitors, or suggest investment opportunities.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+        <form id="chatForm" class="border-t border-gray-200 p-4 bg-white">
+          <label for="chatInput" class="sr-only">Ask AI assistant</label>
+          <div class="flex items-center gap-2">
+            <input id="chatInput" class="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-100 focus:outline-none transition-colors" placeholder="Ask about trends, competitors, or insights..." />
+            <button id="chatSend" type="submit" class="rounded-lg bg-teal-600 px-4 py-2 text-sm text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane text-white"></i>
+                Send
+            </button>
+            </div>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Modal for Detailed Insights -->
+    <div id="modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="modalBackdrop" aria-hidden="true"></div>
+      <div class="pointer-events-auto absolute left-1/2 top-1/2 w-[95%] max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+        <h2 id="modalTitle" class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+            Insight Details
+        </h2>
+        <button id="modalClose" class="rounded-lg p-2 hover:bg-gray-100 transition-colors" aria-label="Close modal">
+            <i class="fa-solid fa-xmark text-gray-500 text-base"></i>
+        </button>
+        </div>
+
+        <div id="modalBody" class="space-y-4 text-sm text-gray-700 max-h-[70vh] overflow-y-auto"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 hidden">
+      <div class="rounded-lg bg-gray-900 px-4 py-3 text-sm text-white shadow-lg flex items-center gap-2 min-w-64" id="toastMsg">
+        <span class="material-symbols-outlined text-base">check_circle</span>
+        <span>Operation completed successfully</span>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Toggle -->
+    <button id="mobileNavToggle" class="fixed bottom-6 right-6 z-40 lg:hidden rounded-full bg-teal-600 p-4 text-white shadow-lg hover:bg-teal-700 transition-colors">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+
+    <script src="script.js"></script>
+  </body>
+</html>

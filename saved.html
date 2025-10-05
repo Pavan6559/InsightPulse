@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <title>Saved Startups • InsightPulse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        important: true,
+      }
+    </script>
+    
+    <!-- Supabase Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.44.4/dist/umd/supabase.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="h-full bg-white text-gray-800">
+    <header class="border-b border-gray-200 bg-white/95 backdrop-blur supports-backdrop-blur:bg-white/60 sticky top-0 z-40">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-14 items-center justify-between">
+          <div class="flex items-center gap-2">
+           <div class="h-8 w-8 rounded bg-gradient-to-br from-teal-600 to-teal-700 flex items-center justify-center">
+  <i class="fas fa-chart-line text-white text-sm"></i>
+</div>
+            <span class="text-xl font-bold text-teal-700">InsightPulse</span>
+          </div>
+          <div class="relative">
+            <button id="userMenuBtn" class="flex items-center gap-2 rounded-full border border-gray-200 px-2 py-1 hover:bg-gray-50 transition-colors" aria-haspopup="menu" aria-expanded="false">
+              <div class="h-7 w-7 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-xs font-medium text-white">
+                U
+              </div>
+              <span class="text-sm text-gray-700" id="userEmail">user@example.com</span>
+              <span class="material-symbols-outlined text-base text-gray-500">expand_more</span>
+            </button>
+            <div id="userMenu" class="absolute right-0 mt-2 w-48 origin-top-right rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-labelledby="userMenuBtn">
+              <a href="./profile.html" class="menu-item flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left" role="menuitem">
+                <i class="fas fa-user text-base"></i>
+                Your Profile
+              </a>
+              <a href="./settings.html" class="menu-item flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 w-full text-left" role="menuitem">
+                <i class="fas fa-cog text-base"></i>
+                Settings
+              </a>
+              <div class="my-1 border-t border-gray-100"></div>
+              <button class="menu-item flex items-center gap-2 text-red-600 w-full text-left px-3 py-2 text-sm hover:bg-gray-50" data-action="logout" role="menuitem">
+                <i class="fas fa-sign-out-alt text-base"></i>
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 flex items-center gap-3">
+            <i class="fas fa-bookmark text-teal-600"></i>
+            Saved Startups
+          </h1>
+          <p class="text-gray-600 mt-2">Your collection of bookmarked startups and insights</p>
+        </div>
+        <a href="./index.html" class="text-sm text-teal-600 hover:text-teal-700 font-medium flex items-center gap-2 transition-colors bg-teal-50 px-4 py-2 rounded-lg">
+          <i class="fas fa-arrow-left"></i>
+          Back to Dashboard
+        </a>
+      </div>
+
+      <div id="savedList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"></div>
+      <div id="noSaved" class="text-center py-12">
+        <div class="max-w-md mx-auto">
+          <i class="fas fa-bookmark text-gray-300 text-6xl mb-4"></i>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">No saved startups yet</h3>
+          <p class="text-gray-600 mb-4">Start saving startups from the dashboard to see them here.</p>
+          <a href="./index.html" class="inline-flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors">
+            <i class="fas fa-search"></i>
+            Explore Startups
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <script src="./saved-script.js"></script>
+  </body>
+</html>
