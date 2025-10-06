@@ -1,6 +1,6 @@
 // ====== Configuration ======
-const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/d217914a-4cca-4049-bd01-0759581d687b"
-const N8N_AI_CHAT_URL = "https://pavan6559.app.n8n.cloud/webhook-test/8a759c92-73f1-4411-96a1-b5a65acb9e7c"
+const N8N_WEBHOOK_URL = "https://pavan6559.app.n8n.cloud/webhook/d217914a-4cca-4049-bd01-0759581d687b"
+const N8N_AI_CHAT_URL = "https://pavan6559.app.n8n.cloud/webhook/8a759c92-73f1-4411-96a1-b5a65acb9e7c"
 
 const N8N_TRACKING_URL = ""
 const N8N_TASK_URL = ""
@@ -986,4 +986,5 @@ if (window.__INSIGHT_MERGE_APPLIED__) {
   window.__INSIGHT_MERGE_APPLIED__ = true;
   console.log("✅ InsightPulse JavaScript merged successfully");
 }
+
 
